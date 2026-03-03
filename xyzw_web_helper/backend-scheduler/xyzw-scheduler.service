@@ -1,0 +1,20 @@
+# Systemd Service for XYZW Backend Scheduler
+
+[Unit]
+Description=XYZW Backend Task Scheduler
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/xyzw-backend-scheduler
+ExecStart=/usr/bin/node /opt/xyzw-backend-scheduler/server.js
+Restart=on-failure
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=xyzw-scheduler
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
